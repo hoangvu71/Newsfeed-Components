@@ -30,14 +30,14 @@ let menuItems = [
 
   Step 5: return the menu component.
 
-  Step 6: add the menu component to the DOM.
+  Step 6:  
   
 */
 
 const menuBtn = document.querySelector('.menu-button');
 
 
-function createMenuComponents (array) {
+function createMenuComponents(array) {
   const menu = document.createElement('div');
   const unorderList = document.createElement('ul');
 
@@ -52,17 +52,29 @@ function createMenuComponents (array) {
     unorderList.appendChild(createList(element));
   })
 
-  function createList (array){
+  function createList(array) {
     const listOne = document.createElement('li');
     unorderList.appendChild(listOne);
     listOne.textContent = array;
 
     return listOne;
   }
-  
-  menuBtn.addEventListener('click', () => {menu.classList.toggle('menu--open')})
+
+  menuBtn.addEventListener('click', () => { menu.classList.toggle('menu--open') });
+
+  //Add btn animation
+
+  menuBtn.addEventListener('click', () => {
+    menuBtn.classList.toggle('menu-ani');
+    const menuAni = document.querySelector('.menu-ani');
+
+    gsap.fromTo('.menu', {x: -400}, { duration: 1, x: 0 });
+
+  })
 
   return menu;
 }
 console.log(document);
 document.body.appendChild(createMenuComponents(menuItems));
+
+
