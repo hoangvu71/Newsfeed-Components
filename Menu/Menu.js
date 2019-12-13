@@ -60,15 +60,20 @@ function createMenuComponents(array) {
     return listOne;
   }
 
-  menuBtn.addEventListener('click', () => { menu.classList.toggle('menu--open') });
+  // menuBtn.addEventListener('click', () => { menu.classList.toggle('menu--open') });
 
   //Add btn animation
 
   menuBtn.addEventListener('click', () => {
-    menuBtn.classList.toggle('menu-ani');
-    const menuAni = document.querySelector('.menu-ani');
+    const menuClasses = Array.from(menu.classList);
 
-    gsap.fromTo('.menu', {x: -400}, { duration: 1, x: 0 });
+    if (menuClasses.includes("menu--open")){
+      gsap.fromTo('.menu', {x: 0}, { duration: 1, x: -400, onComplete: () => {menu.classList.remove("menu--open")} });
+    }
+    else{
+      menu.classList.add("menu--open");
+      gsap.fromTo('.menu', {x: -400}, { duration: 1, x: 0 });
+    }
 
   })
 
