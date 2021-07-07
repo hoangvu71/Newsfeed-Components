@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'The promise of the “learn to code” movement',
+    date: 'December 3, 2018',
+    firstParagraph: 'By the start of the week, more than 2,700 Canadian coding events had been registered with Code.org, a not-for-profit organization in the United States that promotes the week. This annual event incorporates the spirit of the “learn to code” movement; it aims to attract interest and engage students from primary grades to senior secondary levels in developing coding skills.',
+    secondParagraph: 'Governments, corporations, associations in the computer science field and trend-setters all assert that learning to code will play a key role in the future. In this context, learning to code is often presented as a panacea to the job market problems of the 21st century.',
+    thirdParagraph: 'We take particular interest in this topic. Together we combine years of training in computer science, educational technology and educational psychology; our research interest is to develop a teaching and learning model for introducing down-to-earth computer programming concepts and logic.'
   }
 ];
 
@@ -112,3 +119,54 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+const accordian = document.querySelector('.articles');
+data.forEach((element) => {
+  accordian.appendChild(createComponent(element.title,element.date, element.firstParagraph, element.secondParagraph, element.thirdParagraph))
+});
+
+function createComponent(title, date, firstPara, secondPara, thirdPara) {
+  //////////////////////////
+  //Create all the elements
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articlePara = document.createElement('p');
+  
+  //// Three separate paragraph elements
+  const paraOne = document.createElement('p');
+  const paraTwo = document.createElement('p');
+  const paraThree = document.createElement('p');
+  
+  // After that is
+  const buttonExpand = document.createElement('span')
+
+  //////////////////////////
+  //Append elements
+  article.appendChild(articleTitle);
+  article.appendChild(articlePara);
+  article.appendChild(paraOne);
+  article.appendChild(paraTwo);
+  article.appendChild(paraThree);
+  article.appendChild(buttonExpand);
+
+
+  //////////////////////////
+  //Adding classes
+  article.classList.add('article');
+  articlePara.classList.add('date');
+  buttonExpand.classList.add('expandButton');
+
+  ///////////////////////////
+  //Adding contents
+  articleTitle.textContent = title;
+  articlePara.textContent = date;
+  paraOne.textContent = firstPara;
+  paraTwo.textContent = secondPara;
+  paraThree.textContent = thirdPara;
+  buttonExpand.textContent = 'push';
+
+  ///////////////////////////
+  //Adding toggles
+  buttonExpand.addEventListener('click', () => {article.classList.toggle('article-open')});
+  
+  return article;
+}
